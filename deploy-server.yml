@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+
+  pre_tasks:
+    - name: "Gather facts about this instance"
+      action: ec2_facts
+
+  roles:
+    - role: "{{ server_type }}"
+

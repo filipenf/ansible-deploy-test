@@ -1,0 +1,15 @@
+- name: install nginx
+  yum: name=nginx state=present
+  become: yes
+
+- name: clone git repo
+  git: repo="https://github.com/filipenf/todomvc.git" dest="/opt/todomvc" depth=1
+  become: yes
+
+- name: create symlink to nginx
+  file: dest=/usr/share/nginx/html/todo src=/opt/todomvc/examples/angular2/ state=link
+  become: yes
+
+- name: ensure nginx is running
+  service: name=nginx state=restarted enabled=yes
+  become: yes

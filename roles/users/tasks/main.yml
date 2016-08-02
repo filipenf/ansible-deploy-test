@@ -1,0 +1,11 @@
+---
+- name: create admin group
+  group: name=admins state=present
+  become: yes
+
+- name: add admins group to sudoers
+  lineinfile: dest=/etc/sudoers line='%admins ALL=(ALL) NOPASSWD:ALL'
+
+- include: create-user.yml
+  with_items: "{{ users }}"
+

@@ -1,0 +1,9 @@
+---
+- name: add user
+  user: name="{{item.name}}" uid="{{ item.uid }}" state=present
+  become: yes
+
+- name: add user key
+  authorized_key: user="{{item.name}}" key="{{ lookup('file', item.name+'.pub') }}"
+  become: yes
+

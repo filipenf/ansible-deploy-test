@@ -1,0 +1,7 @@
+---
+
+- name: install base packages
+  yum: name="epel-release" state=present
+  become: yes
+
+
